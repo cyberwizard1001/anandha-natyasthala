@@ -1,0 +1,22 @@
+---
+const faqs = [
+  ["Are the classes suitable for all age groups?", "Yes, the classes are designed to cater to children, teenagers, adults, and even senior students."],
+  ["Do I need prior dance experience to join?", "No prior experience is necessary. Our classes welcome complete beginners as well as those with previous dance training."],
+  ["What equipment do I need for the class?", "All you need is a device with internet connection, comfortable clothing, a quiet space, and a positive mindset."],
+  ["How do I register for the online classes?", "You can register by contacting us directly or by using the interest form on this page."],
+  ["Can I attend a trial class before enrolling?", "Yes, we offer a trial class to help you understand our teaching style and decide whether the program suits you."],
+  ["Can I cancel or reschedule a class?", "We try to accommodate rescheduling when possible, with notice given in advance and subject to availability."],
+];
+---
+
+<section class="content-pad section-gap">
+  <h2 class="section-title">FAQs</h2>
+  <div class="mt-6 grid gap-4 md:grid-cols-2">
+    {faqs.map(([q, a]) => (
+      <article class="soft-card p-5">
+        <h3 class="text-[0.98rem] font-semibold text-[#a93c31]">{q}</h3>
+        <p class="mt-3 text-sm leading-6 text-[#6f655d]">{a}</p>
+      </article>
+    ))}
+  </div>
+</section>
