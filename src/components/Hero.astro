@@ -4,7 +4,7 @@ import heroDancer from "../assets/images/hero-dancer.png";
 ---
 
 <!-- Full-viewport split hero — grid layout (no absolute positioning) -->
-<section class="grid min-h-screen overflow-hidden lg:grid-cols-2">
+<section class="grid overflow-hidden lg:min-h-screen lg:grid-cols-2">
 
   <!-- Left — text content -->
   <div class="relative z-10 flex flex-col justify-center pad pb-16 pt-28 lg:py-0">
@@ -37,7 +37,7 @@ import heroDancer from "../assets/images/hero-dancer.png";
   </div>
 
   <!-- Right — image fills grid cell naturally -->
-  <div class="relative min-h-[60vw] lg:min-h-0">
+  <div class="relative min-h-[100vw] sm:min-h-[80vw] lg:min-h-0">
     <!-- Gradient: fades image into background on the left (desktop) -->
     <div class="absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-ink to-transparent"></div>
     <!-- Gradient: fades top on mobile so nav is readable -->
