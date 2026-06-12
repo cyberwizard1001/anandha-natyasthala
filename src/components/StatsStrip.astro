@@ -1,0 +1,22 @@
+---
+const stats = [
+  { value: "18+",  label: "Years of training" },
+  { value: "150+", label: "Performances" },
+  { value: "10+",  label: "Natyanjali festivals" },
+  { value: "4+",  label: "Dance dramas" },
+];
+---
+
+<div class="kolam-rule"></div>
+<div>
+  <div class="page-wrap pad">
+    <dl class="grid grid-cols-2 divide-x divide-border md:grid-cols-4">
+      {stats.map(({ value, label }) => (
+        <div class="flex flex-col items-center py-10 px-4 text-center">
+          <dt class="display text-[2.6rem] text-gold sm:text-[3.2rem]">{value}</dt>
+          <dd class="eyebrow mt-2 text-muted">{label}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</div>

@@ -12,24 +12,20 @@ import Footer from "../components/Footer.astro";
 ---
 
 <BaseLayout
-	title="Anandha Natyasthala"
-	description="Bharatanatyam dance school website"
+  title="Anandha Natyasthala — Bharatanatyam Dance School"
+  description="Classical Bharatanatyam dance school in the Vazhuvoor bani, founded by Sumithra Sudhakar. Online classes for children and adults of all levels."
 >
-	<Header />
-	<main>
-		<div class="page-wrap">
-			<Hero />
-			<IntroBlocks />
-			<DanceStyle />
-		</div>
-
-		<AboutFounder />
-
-		<div class="page-wrap">
-			<FAQ />
-			<RegisterInterest />
-			<ContactSection />
-		</div>
-	</main>
-	<Footer />
+  <Header />
+  <main>
+    <Hero />
+    <IntroBlocks />
+    <DanceStyle />
+    <AboutFounder />
+    <FAQ />
+    <div class="kolam-rule"></div>
+    <RegisterInterest />
+    <div class="kolam-rule-dark"></div>
+    <ContactSection />
+  </main>
+  <Footer />
 </BaseLayout>

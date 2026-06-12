@@ -1,0 +1,282 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import StatsStrip from "../components/StatsStrip.astro";
+import founderPhoto from "../assets/images/founder.png";
+
+const performances = [
+  {
+    category: "National Festivals & Natyanjali",
+    items: [
+      "Chidambaram Natyanjali (44th edition) — 2025 · Nataraja temple, Chidambaram",
+      "Mayura Natyanjali — 2020, 2021, 2022, 2023, 2024",
+      "Kovayil Thiruvayaaru — 2021, 2022, 2023, 2024",
+      "Hosur Natyanjali — 2024 · Title: Natana Kala Mani",
+      "Karur Natyanjali — 2020 · Title: Natana Kala Shri",
+      "Salem Natyanjali — 2020",
+      "Perur Natyanjali — 2017",
+    ],
+  },
+  {
+    category: "International & Major Platforms",
+    items: [
+
+      "Vaishakha Natanam 2026 — Bekal Gokulam Goushala, Kerala · World-record festival: 372 hrs, 2,663 artists",
+      "Third International Conference on Thirukkural — Delhi Tamil Conference, New Delhi, 2019",
+      "Azadi Ka Amrit Mahotsav — South Zone Cultural Centre / Ministry of Culture, 7 January 2022",
+      "Coimbatore Vizha 2024 — Isha Yoga Center, 30 December 2024",
+    ],
+  },
+  {
+    category: "Corporate & Commercial",
+    items: [
+      "SAP Labs India Innovation Park Grand Opening — 2025 · Invocatory performance, presence of Karnataka CM Shri Siddaramaiah",
+      "SAP Labs Board Members Welcome Performance — 2024",
+      "SAP Karnataka Rajyothsava Celebrations — 2023, 2024, 2025",
+      "RMKV Silks 'Weaves & Wonders' Festive Collection Launch — 20 September 2025, Maheshwari Bhavan, Coimbatore",
+    ],
+  },
+  {
+    category: "Ticketed Productions (Medai, Coimbatore)",
+    items: [
+      "Irumudi Iraiva — 4 January 2026 · Lead dancer",
+      "Karunai Kadale Kaamakshi — 23 April 2025",
+    ],
+  },
+  {
+    category: "Major Dance Drama Productions",
+    items: [
+      "Irumudi Iraiva — Key dancer & co-choreographer",
+      "Nillu Kannappa — Key dancer & co-choreographer",
+      "Valluvam Vaazhai Aanal — Key dancer & co-choreographer",
+      "Bharathiyin Agni Kunjugal — Key dancer & co-choreographer",
+    ],
+  },
+];
+
+const qualifications = [
+  { year: "2025", title: "Diploma in Nattuvangam", org: "J. Jayalalithaa Music and Fine Arts University" },
+  { year: "2024", title: "Teacher's Training Course", org: "Global Arts Academy UK · Prayathnam Level 5 with excellence — Yathna Prathibha" },
+  { year: "2023", title: "B.Tech, Computer Science Engineering", org: "Amrita Viswa Vidyapeetham, Coimbatore" },
+  { year: "2018", title: "Arangetram", org: "28 January 2018 · Shankkaram School of Art" },
+  { year: "2014–present", title: "Principal Training — Vazhuvoor bani", org: "Kalai Choodamani Smt. Sasmitta K. Aroraa · Shankkaram School of Art" },
+];
+---
+
+<BaseLayout
+  title="About — Sumithra Sudhakar · Anandha Natyasthala"
+  description="Full biography, performance career, qualifications, and teaching background of Sumithra Sudhakar — Bharatanatyam dancer, teacher, and founder of Anandha Natyasthala."
+>
+  <Header />
+
+  <main class="pt-24">
+
+    <!-- Page header -->
+    <section class="section-y pb-0">
+      <div class="page-wrap pad">
+        <div class="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-start lg:gap-20">
+          <div>
+            <p class="eyebrow mb-6">Founder & Principal Teacher</p>
+            <h1 class="display text-[3rem] text-cream sm:text-[4rem] lg:text-[5.5rem]">
+              Sumithra<br />Sudhakar
+            </h1>
+            <p class="mt-6 text-sm leading-7 text-muted">
+              Bharatanatyam dancer, teacher, and choreographer. Trained for over eighteen years in the Vazhuvoor bani under Kalai Choodamani Smt. Sasmitta K. Aroraa of Shankkaram School of Art — in the lineage of S.K. Rajarathnam Pillai. Founder of Anandha Natyasthala.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="mailto:hello@anandhanatyasthala.com" class="btn-primary">Contact</a>
+              <a href="https://www.instagram.com/sumiithraa_sudhakar" target="_blank" rel="noopener noreferrer" class="btn-outline">Instagram</a>
+            </div>
+          </div>
+          <div>
+            <Image
+              src={founderPhoto}
+              alt="Sumithra Sudhakar"
+              class="w-full object-cover aspect-[4/5]"
+              widths={[400, 750]}
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              format="webp"
+              quality="mid"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <StatsStrip />
+
+    <!-- Profile -->
+    <section class="section-y pt-12 bg-ink-2">
+      <div class="page-wrap pad">
+        <div class="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
+          <div>
+            <p class="eyebrow mb-4">Profile</p>
+          </div>
+          <div class="space-y-4 text-sm leading-7 text-muted">
+            <p>
+              Bharatanatyam dancer with over eighteen years of training and performance in the <span class="text-cream">Vazhuvoor bani</span> under Kalai Choodamani Smt. Sasmitta K. Aroraa of Shankkaram School of Art, in the lineage of S.K. Rajarathnam Pillai.
+            </p>
+            <p>
+              Active performer across more than <span class="text-cream">150 professional engagements</span> — spanning national Natyanjali festivals, government cultural programmes, international platforms, ticketed productions, and corporate events.
+            </p>
+            <p>
+              Founder of Anandha Natyasthala, providing <span class="text-cream">free classical Bharatanatyam training</span> to students from rural and financially limited backgrounds. Senior Faculty at Shankkaram Academy of Arts (with branches in USA, UK, Canada, and the Middle East).
+            </p>
+            <p>
+              Featured in Trinity Mirror (national daily) by V. Ramjee, Kalaimamani awardee, April 2026. Holder of the titles Natana Kala Mani (Hosur Natyanjali, 2024), Natana Kala Shri (Karur Natyanjali, 2020), and Nritya Vinodini (Gana Mukundhapriya, 2019).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Training & Lineage -->
+    <section class="section-y">
+      <div class="page-wrap pad">
+        <div class="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
+          <div>
+            <p class="eyebrow mb-4">Training & Lineage</p>
+          </div>
+          <div>
+            <div class="space-y-6">
+              <div class="border-l-2 border-gold pl-6">
+                <p class="text-sm font-medium text-cream">Kalai Choodamani Smt. Sasmitta K. Aroraa</p>
+                <p class="mt-1 text-xs text-muted">Shankkaram School of Art · 2014 – present</p>
+                <p class="mt-2 text-sm leading-6 text-muted">Vazhuvoor bani, in the lineage of Kalaimamai S.K. Rajarathnam Pillai. Arangetram: 28 January 2018. Currently active as Senior Faculty at Shankkaram Academy of Arts.</p>
+              </div>
+              <div class="border-l-2 border-border pl-6">
+                <p class="text-sm font-medium text-cream">Foundational training</p>
+                <p class="mt-1 text-xs text-muted">Other distinguished Bharatanatyam gurus · Prior to 2014</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Qualifications -->
+    <section class="section-y bg-ink-2">
+      <div class="page-wrap pad">
+        <div class="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
+          <div>
+            <p class="eyebrow mb-4">Qualifications</p>
+          </div>
+          <div class="divide-y divide-border">
+            {qualifications.map(({ year, title, org }) => (
+              <div class="flex gap-6 py-5">
+                <span class="eyebrow w-20 shrink-0 pt-0.5 text-muted">{year}</span>
+                <div>
+                  <p class="text-sm font-medium text-cream">{title}</p>
+                  <p class="mt-1 text-xs leading-5 text-muted">{org}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Titles -->
+    <section class="section-y">
+      <div class="page-wrap pad">
+        <div class="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
+          <div>
+            <p class="eyebrow mb-4">Titles & Recognition</p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {[
+              { title: "Natana Kala Mani", event: "Hosur Natyanjali", year: "October 2024" },
+              { title: "Natana Kala Shri", event: "Karur Natyanjali", year: "October 2020" },
+              { title: "Nritya Vinodini", event: "Gana Mukundhapriya", year: "December 2019" },
+              { title: "Media Feature", event: "Trinity Mirror · Article by V. Ramjee, Kalaimamani awardee", year: "April 2026" },
+            ].map(({ title, event, year }) => (
+              <div class="border border-border p-5">
+                <p class="display text-xl text-gold">{title}</p>
+                <p class="mt-2 text-xs text-cream">{event}</p>
+                <p class="eyebrow mt-1 text-muted">{year}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance Career -->
+    <section class="section-y bg-ink-2">
+      <div class="page-wrap pad">
+        <p class="eyebrow mb-3">Performance Career</p>
+        <h2 class="display text-[2rem] text-cream sm:text-[2.5rem]">150+ Engagements</h2>
+        <div class="mt-12 grid gap-10 lg:grid-cols-2">
+          {performances.map(({ category, items }) => (
+            <div>
+              <p class="eyebrow mb-4 text-gold">{category}</p>
+              <ul class="space-y-3">
+                {items.map(item => (
+                  <li class="flex gap-3 text-sm text-muted">
+                    <span class="mt-2 h-px w-3 shrink-0 bg-border translate-y-[0.3rem]"></span>
+                    <span class="leading-6">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Teaching -->
+    <section class="section-y">
+      <div class="page-wrap pad">
+        <div class="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
+          <div>
+            <p class="eyebrow mb-4">Teaching & Mentorship</p>
+          </div>
+          <div class="space-y-8">
+            {[
+              {
+                role: "Founder & Principal Teacher — Anandha Natyasthala",
+                period: "2024 – present",
+                detail: "Free-of-cost online Bharatanatyam training to students from rural and financially limited backgrounds. Conducted the school's inaugural Salangai Poojai in May 2026, recognised in independent media coverage.",
+              },
+              {
+                role: "Senior Faculty — Shankkaram Academy of Arts",
+                period: "2021 – present",
+                detail: "Choreography, mentorship, and production support across major Shankkaram dance dramas and events. Event hosting and anchoring for institutional performances. Academy has branches in USA, UK, Canada, and the Middle East.",
+              },
+              {
+                role: "Community Teaching — Ramana Nandavanam / Shankkaram, Ayyampalayam, Tiruvannamalai",
+                period: "2022 – present",
+                detail: "Free Bharatanatyam instruction to children from rural Tamil Nadu.",
+              },
+            ].map(({ role, period, detail }) => (
+              <div class="border-l-2 border-border pl-6">
+                <p class="text-sm font-medium text-cream">{role}</p>
+                <p class="eyebrow mt-1 text-muted">{period}</p>
+                <p class="mt-3 text-sm leading-6 text-muted">{detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-y bg-ink-2">
+      <div class="page-wrap pad text-center">
+        <h2 class="display text-[2rem] text-cream sm:text-[2.5rem]">Interested in classes?</h2>
+        <p class="mt-4 text-sm text-muted">Register your interest and we'll be in touch with class timings and details.</p>
+        <div class="mt-8 flex justify-center gap-4 flex-wrap">
+          <a href="/#register" class="btn-primary">Register interest</a>
+          <a href="/#contact" class="btn-outline">Get in touch</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>

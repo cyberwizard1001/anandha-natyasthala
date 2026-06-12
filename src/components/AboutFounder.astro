@@ -1,32 +1,85 @@
-<section id="about" class="content-pad section-gap bg-black text-white">
-  <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-    <div>
-      <div class="overflow-hidden rounded-[1.50rem]">
-        <img
-          src="/images/founder.jpg"
-          alt="Founder portrait"
-          class="aspect-[3/4] w-full object-cover"
-        />
-      </div>
-    </div>
+---
+import { Image } from "astro:assets";
+import founderPhoto from "../assets/images/founder.png";
+---
 
-    <div>
-      <p class="text-lg text-white/80">Hello, I am</p>
-      <h2
-        class="mt-2 max-w-xl text-[2.3rem] leading-tight text-white sm:text-[3rem] lg:text-[3.5rem]"
-      >
-        Sumithra Sudhakar,
-      </h2>
-      <h3 class="mt-1 text-xl text-white/70 sm:text-2xl">
-        the single founder of this product
-      </h3>
-      <p class="mt-5 max-w-xl text-sm leading-7 text-white/75 sm:text-base">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-      <a href="#contact" class="btn-secondary mt-7">Read more</a>
+<section id="about" class="section-y bg-ink-2">
+  <div class="page-wrap pad">
+    <div class="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+
+      <!-- Image -->
+      <div class="relative">
+        <Image
+          src={founderPhoto}
+          alt="Sumithra Sudhakar — Founder of Anandha Natyasthala"
+          class="w-full object-cover aspect-[3/4] lg:aspect-[4/5]"
+          widths={[400, 750]}
+          sizes="(min-width: 1024px) 45vw, 100vw"
+          format="webp"
+          quality="mid"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="kolam-corner absolute -bottom-4 -right-4 hidden lg:block"></div>
+      </div>
+
+      <!-- Bio -->
+      <div class="lg:pt-8">
+        <p class="eyebrow mb-6">Founder & Principal Teacher</p>
+        <h2 class="display text-[2.8rem] text-cream sm:text-[3.5rem] lg:text-[4.5rem]">
+          Sumithra<br />Sudhakar
+        </h2>
+
+        <!-- Inline stats -->
+        <dl class="mt-8 grid grid-cols-3 gap-4 border-y border-border py-6">
+          <div>
+            <dt class="display text-[2rem] text-gold">18+</dt>
+            <dd class="eyebrow mt-1 text-muted">Years of<br/>training</dd>
+          </div>
+          <div>
+            <dt class="display text-[2rem] text-gold">150+</dt>
+            <dd class="eyebrow mt-1 text-muted">Professional<br/>engagements</dd>
+          </div>
+          <div>
+            <dt class="display text-[2rem] text-gold">10+</dt>
+            <dd class="eyebrow mt-1 text-muted">Natyanjali<br/>festivals</dd>
+          </div>
+        </dl>
+
+        <div class="mt-7 space-y-4 text-sm leading-7 text-muted">
+          <p>
+            Bharatanatyam dancer trained for over eighteen years in the Vazhuvoor bani under <span class="text-cream">Kalai Choodamani Smt. Sasmitta K. Aroraa</span> of Shankkaram School of Art — in the lineage of S.K. Rajarathnam Pillai. Arangetram performed January 2018; currently Senior Faculty at Shankkaram Academy of Arts.
+          </p>
+          <p>
+            Active performer across more than 150 professional engagements — national Natyanjali festivals including Chidambaram (44th edition) and Mayura Natyanjali, government cultural programmes, international platforms including Delhi, corporate events for SAP Labs and RMKV Silks, and ticketed productions at Medai, Coimbatore.
+          </p>
+          <p>
+            Holder of a Diploma in Nattuvangam (2025), a Teacher's Training Certificate from Global Arts Academy UK (2024, Prayathnam Level 5 with excellence — title: Yathna Prathibha), and a B.Tech in Computer Science from Amrita Viswa Vidyapeetham (2023).
+          </p>
+          <p>
+            Founder of Anandha Natyasthala — a school built on the belief that access to classical art should not depend on circumstance.
+          </p>
+        </div>
+
+        <!-- Honour titles -->
+        <div class="mt-8 flex flex-wrap gap-2">
+          {["Natana Kala Mani 2024", "Natana Kala Shri 2020", "Nritya Vinodini 2019"].map(t => (
+            <span class="border border-border px-3 py-1 text-xs text-muted">{t}</span>
+          ))}
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a
+            href="https://www.instagram.com/sumiithraa_sudhakar"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-outline text-xs"
+          >
+            @sumiithraa_sudhakar
+          </a>
+          <a href="#contact" class="btn-gold text-xs">Get in touch</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>

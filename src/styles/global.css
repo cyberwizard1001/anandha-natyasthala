@@ -1,101 +1,137 @@
 @import "tailwindcss";
 
+@theme {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+
+  /* Deep kumkum/maroon ground, not flat black — kolam-night palette */
+  --color-ink:       #1A0A0C;
+  --color-ink-2:     #240F11;
+  --color-ink-3:     #321518;
+  --color-border:    #4A2024;
+  --color-gold:      #D9A227;
+  --color-gold-2:    #F2C75C;
+  --color-crimson:   #BE2D2D;
+  --color-crimson-2: #921F1F;
+  --color-peacock:   #0E6E5C;
+  --color-peacock-2: #14997F;
+  --color-cream:     #F6ECDA;
+  --color-cream-2:   #FBF3E4;
+  --color-muted:     #C2A39C;
+}
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
   margin: 0;
-  line-height: 0.90;
+  line-height: 1.6;
+  background-color: #1A0A0C;
+  color: #F6ECDA;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* ── Layout helpers ─────────────────────────── */
 @layer components {
   .page-wrap {
     @apply mx-auto w-full max-w-[1440px];
   }
 
-  .content-pad {
-    @apply px-4;
-
-    @variant sm {
-      @apply px-6;
-    }
-
-    @variant lg {
-      @apply px-8;
-    }
+  .pad {
+    @apply px-5 sm:px-8 lg:px-14;
   }
 
-  .section-gap {
-    @apply py-14;
-
-    @variant sm {
-      @apply py-16;
-    }
-
-    @variant lg {
-      @apply py-24;
-    }
+  .section-y {
+    @apply py-20 sm:py-24 lg:py-32;
   }
 
-  .soft-card {
-    @apply rounded-[1.5rem] bg-white shadow-[0_1px_20px_rgba(0,0,0,0.05)] ring-1 ring-black/5;
+  /* ── Typography ─────────────────────────────── */
+  .display {
+    font-family: var(--font-display);
+    @apply font-light leading-[0.9] tracking-tight;
   }
 
-  .label {
-    @apply mb-2 block text-sm font-medium text-[#2a231f];
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.22em] text-gold;
   }
 
+  /* ── Buttons ────────────────────────────────── */
   .btn-primary {
-    @apply inline-flex w-full items-center justify-center rounded-sm bg-[#a93c31] px-5 py-3 text-sm font-medium text-white transition;
-
-    @variant hover {
-      @apply bg-[#8e2f27];
-    }
-
-    @variant sm {
-      @apply w-auto;
-    }
+    @apply relative inline-flex items-center justify-center gap-2 rounded-none px-7 py-3.5 text-sm font-medium tracking-wide transition-colors duration-200 bg-gold text-ink hover:bg-gold-2;
+    box-shadow: inset 0 0 0 1px rgba(242, 199, 92, 0.35);
   }
 
-  .input {
-    @apply w-full rounded-sm border border-black/10 bg-white px-4 py-3 text-sm outline-none transition;
-
-    @variant focus {
-      @apply border-[#a93c31] ring-2 ring-[#a93c31]/15;
-    }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-none px-7 py-3.5 text-sm font-medium tracking-wide transition-colors duration-200 border border-border text-cream hover:border-gold hover:text-gold;
   }
 
-  .section-title {
-    @apply text-[1.5rem] tracking-tight;
-
-    @variant sm {
-      @apply text-[1.7rem];
-    }
-
-    @variant lg {
-      @apply text-[1.85rem];
-    }
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-none px-7 py-3.5 text-sm font-medium tracking-wide transition-colors duration-200 bg-gold text-ink hover:bg-gold-2;
   }
 
-  .section-copy {
-    @apply mt-2 max-w-4xl text-sm leading-7 text-[#6f655d];
-
-    @variant sm {
-      @apply text-base;
-    }
+  .btn-peacock {
+    @apply inline-flex items-center justify-center gap-2 rounded-none px-7 py-3.5 text-sm font-medium tracking-wide transition-colors duration-200 bg-peacock text-cream hover:bg-peacock-2;
   }
 
-  @layer components {
-  .btn-secondary {
-    @apply inline-flex w-full items-center justify-center rounded-sm bg-white px-5 py-3 text-sm font-medium text-black transition;
-    @variant hover {
-      @apply bg-white/90;
-    }
-    @variant sm {
-      @apply w-auto;
-    }
+  /* ── Form elements ──────────────────────────── */
+  .field-label {
+    @apply mb-1.5 block text-xs font-medium uppercase tracking-[0.15em] text-muted;
   }
-}
+
+  .field-input {
+    @apply w-full border border-border bg-ink-3 px-4 py-3 text-sm text-cream outline-none transition-colors duration-200 placeholder:text-muted/50 focus:border-gold focus:ring-1 focus:ring-gold/30;
+  }
+
+  /* ── Divider ────────────────────────────────── */
+  .rule {
+    @apply border-t border-border;
+  }
+
+  /* ── Kolam dot border — traditional threshold pattern as a rule ── */
+  .kolam-rule {
+    height: 3px;
+    background-image: radial-gradient(circle, var(--color-gold) 1.5px, transparent 1.6px);
+    background-size: 14px 3px;
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.5;
+  }
+
+  /* Same dotted threshold, crimson dots for light (cream) sections */
+  .kolam-rule-dark {
+    height: 3px;
+    background-image: radial-gradient(circle, var(--color-crimson) 1.5px, transparent 1.6px);
+    background-size: 14px 3px;
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.4;
+  }
+
+  /* Kolam dot-grid — decorative corner motif */
+  .kolam-corner {
+    width: 64px;
+    height: 64px;
+    background-image: radial-gradient(circle, var(--color-gold) 1.5px, transparent 1.6px);
+    background-size: 12px 12px;
+    opacity: 0.6;
+  }
+
+  /* Faint full-field kolam texture for background depth */
+  .kolam-texture {
+    background-image: radial-gradient(circle, var(--color-gold) 1px, transparent 1.4px);
+    background-size: 28px 28px;
+  }
+
+  /* ── Soft card (light sections) ─────────────── */
+  .card-light {
+    @apply bg-cream-2 text-ink;
+  }
 }

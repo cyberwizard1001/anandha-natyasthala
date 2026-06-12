@@ -2,11 +2,36 @@
 import "../styles/global.css";
 
 type Props = {
-  title: string;
+  title?: string;
   description?: string;
+  image?: string;
 };
 
-const { title, description = "Anandha Natyasthala" } = Astro.props as Props;
+const {
+  title = "Anandha Natyasthala",
+  description = "Classical Bharatanatyam dance school in the Vazhuvoor bani, founded by Sumithra Sudhakar. Online classes for children and adults of all levels.",
+  image = "/images/hero-dancer.jpg",
+} = Astro.props as Props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "PerformingArtsTheater",
+  name: "Anandha Natyasthala",
+  description: "Classical Bharatanatyam dance school in the Vazhuvoor bani, founded by Sumithra Sudhakar.",
+  url: "https://anandhanatyasthala.com",
+  email: "hello@anandhanatyasthala.com",
+  founder: {
+    "@type": "Person",
+    name: "Sumithra Sudhakar",
+    jobTitle: "Founder & Principal Teacher",
+    sameAs: ["https://www.instagram.com/sumiithraa_sudhakar"],
+  },
+  sameAs: ["https://www.instagram.com/anandhanatyasthala"],
+  knowsAbout: ["Bharatanatyam", "Vazhuvoor bani", "Classical Indian Dance"],
+};
 ---
 
 <!doctype html>
@@ -14,10 +39,47 @@ const { title, description = "Anandha Natyasthala" } = Astro.props as Props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Primary Meta -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Sumithra Sudhakar" />
+    <meta name="keywords" content="Bharatanatyam, dance school, Vazhuvoor bani, classical dance, online dance classes, Sumithra Sudhakar, Anandha Natyasthala" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Anandha Natyasthala" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
-  <body class="bg-[#ffffff] text-[#1f1a17]">
+  <body>
     <slot />
+    <script is:inline src="https://tally.so/widgets/embed.js"></script>
   </body>
 </html>

@@ -1,15 +1,101 @@
-<header class="content-pad pt-4 sm:pt-5 lg:pt-6">
-  <div class="flex items-center justify-between">
-    <a href="/" class="flex items-center gap-3">
-      <div class="h-12 w-12 overflow-hidden rounded-full bg-[#efe2d1] ring-1 ring-black/5 sm:h-14 sm:w-14">
-        <img src="/images/logo.jpg" alt="Anandha Natyasthala logo" class="h-full w-full object-cover" />
+---
+import { Image } from "astro:assets";
+import logo from "../assets/images/logo.png";
+---
+
+<header id="site-header" class="fixed inset-x-0 top-0 z-50 transition-colors duration-300">
+  <!-- Always-on gradient so nav stays readable over the hero image -->
+  <div class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-black/50 to-transparent"></div>
+  <div class="page-wrap pad flex h-16 items-center justify-between sm:h-18">
+
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3 group">
+      <div class="h-9 w-9 overflow-hidden rounded-full ring-1 ring-white/10">
+        <Image src={logo} alt="Anandha Natyasthala" class="h-full w-full object-cover" width={36} height={36} format="webp" decoding="async" />
       </div>
-      <span class="text-sm leading-tight font-medium sm:text-base">
-        anandha<br />natyasthala
+      <span class="font-display text-lg font-light leading-none tracking-wide text-cream group-hover:text-gold transition-colors duration-200">
+        Anandha<br /><span class="text-muted text-sm">Natyasthala</span>
       </span>
     </a>
-    <a href="#about" class="text-sm font-medium text-[#2d2521] hover:text-[#a93c31]">
-      about me
-    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] sm:flex">
+      <a href="/" class="px-3 py-2 text-muted transition-colors hover:text-cream">Home</a>
+      <a href="/about" class="px-3 py-2 text-muted transition-colors hover:text-cream">About</a>
+      <a href="/gallery" class="px-3 py-2 text-muted transition-colors hover:text-cream">Gallery</a>
+      <a href="/#register" class="btn-primary ml-2 text-[0.7rem] px-5 py-2.5">Register</a>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="menu-btn"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 sm:hidden"
+    >
+      <span class="menu-bar block h-px w-6 bg-cream transition-all duration-300"></span>
+      <span class="menu-bar block h-px w-6 bg-cream transition-all duration-300"></span>
+      <span class="menu-bar block h-px w-4 bg-cream transition-all duration-300 self-start"></span>
+    </button>
+  </div>
+
+  <!-- Mobile nav panel -->
+  <div
+    id="mobile-menu"
+    class="hidden border-t border-border bg-ink px-5 py-6 sm:hidden"
+  >
+    <nav class="flex flex-col gap-1">
+      {[["/","Home"],["/about","About"],["/gallery","Gallery"],["/#contact","Contact"]].map(([href,label]) => (
+        <a
+          href={href}
+          class="block py-3 text-sm font-medium text-muted transition-colors hover:text-cream border-b border-border last:border-0"
+        >{label}</a>
+      ))}
+      <a href="/#register" class="btn-primary mt-4 text-center">Register interest</a>
+    </nav>
   </div>
 </header>
+
+<script>
+  // Sticky header scroll effect
+  const header = document.getElementById("site-header");
+  const onScroll = () => {
+    if (window.scrollY > 40) {
+      header?.classList.add("bg-ink/95", "backdrop-blur-sm", "border-b", "border-border");
+    } else {
+      header?.classList.remove("bg-ink/95", "backdrop-blur-sm", "border-b", "border-border");
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu toggle
+  const btn = document.getElementById("menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const bars = document.querySelectorAll(".menu-bar");
+
+  btn?.addEventListener("click", () => {
+    const open = menu?.classList.toggle("hidden") === false;
+    btn.setAttribute("aria-expanded", String(open));
+    // Animate bars into X
+    if (open) {
+      bars[0]?.classList.add("translate-y-[7px]", "rotate-45");
+      bars[1]?.classList.add("-translate-y-[7px]", "-rotate-45");
+      bars[2]?.classList.add("opacity-0");
+    } else {
+      bars[0]?.classList.remove("translate-y-[7px]", "rotate-45");
+      bars[1]?.classList.remove("-translate-y-[7px]", "-rotate-45");
+      bars[2]?.classList.remove("opacity-0");
+    }
+  });
+
+  menu?.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      menu.classList.add("hidden");
+      btn?.setAttribute("aria-expanded", "false");
+      bars[0]?.classList.remove("translate-y-[7px]", "rotate-45");
+      bars[1]?.classList.remove("-translate-y-[7px]", "-rotate-45");
+      bars[2]?.classList.remove("opacity-0");
+    });
+  });
+</script>

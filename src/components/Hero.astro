@@ -1,53 +1,60 @@
 ---
-const heroImage = "/images/hero-dancer.jpg";
-const instagramLogo = "/images/instagram-logo.jpg";
+import { Image } from "astro:assets";
+import heroDancer from "../assets/images/hero-dancer.png";
 ---
 
-<section class="content-pad pt-4 sm:pt-5 lg:pt-6">
-    <div
-        class="relative overflow-hidden rounded-[1.5rem] min-h-[34rem] sm:min-h-[42rem] lg:min-h-[48rem]"
-        style="background: linear-gradient(180deg, rgba(255,232,208,1) 0%, rgba(255,232,208,1) 23%, rgba(255,254,252,1) 80%, rgba(255,255,255,1) 100%);"
-    >
-        <div
-            class="grid min-h-[34rem] items-center gap-10 px-6 py-8 sm:min-h-[42rem] sm:px-10 sm:py-10 lg:min-h-[48rem] lg:grid-cols-2 lg:px-12 lg:py-12"
-        >
-            <div class="max-w-2xl self-center">
-                <h1
-                    class="max-w-[12ch] text-[3rem] leading-[0.92] text-[#c37616] sm:text-[4.3rem] lg:text-[5.4rem]"
-                >
-                    Anandha<br />Natyasthala
-                </h1>
+<!-- Full-viewport split hero — grid layout (no absolute positioning) -->
+<section class="grid min-h-screen overflow-hidden lg:grid-cols-2">
 
-                <p
-                    class="mt-7 max-w-sm text-[0.92rem] italic leading-6 text-[#8f6a53] sm:text-base lg:mt-8"
-                >
-                    Anandam Nityena Samarpitam<br />
-                    Bliss Offered Through Dance
-                </p>
+  <!-- Left — text content -->
+  <div class="relative z-10 flex flex-col justify-center pad pb-16 pt-28 lg:py-0">
+    <div class="kolam-texture pointer-events-none absolute inset-0 opacity-[0.06]"></div>
+    <p class="eyebrow mb-8">Bharatanatyam · Classical Dance</p>
+    <h1 class="display text-[3.8rem] text-cream sm:text-[5.5rem] lg:text-[6.5rem] xl:text-[7.5rem]">
+      Anandha<br />Natyasthala
+    </h1>
+    <p class="mt-8 font-display text-xl italic font-light text-muted sm:text-2xl">
+      Anandam Nityena Samarpitam
+    </p>
+    <p class="mt-1 text-sm tracking-wide text-muted/70">Bliss Offered Through Dance</p>
 
-                <div
-                    class="mt-14 flex items-center gap-3 text-sm text-[#1f1a17] sm:mt-16"
-                >
-                    <img
-                        src={instagramLogo}
-                        alt="Instagram logo"
-                        class="aspect-[1/1]"
-                    />
-                    <span>@anandhanatyasthala</span>
-                </div>
-            </div>
-
-            <div class="flex items-center justify-center lg:justify-end">
-                <div
-                    class="w-full max-w-[19rem] overflow-hidden rounded-[1.4rem] bg-transparent sm:max-w-[22rem] lg:max-w-[29rem]"
-                >
-                    <img
-                        src={heroImage}
-                        alt="Classical dancer in performance pose"
-                        class="block aspect-[4/5] h-full w-full object-cover"
-                    />
-                </div>
-            </div>
-        </div>
+    <div class="mt-12 flex flex-wrap items-center gap-4">
+      <a href="#register" class="btn-primary">Register interest</a>
+      <a href="/about" class="btn-outline">About the school</a>
     </div>
+
+    <a
+      href="https://www.instagram.com/anandhanatyasthala"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-14 flex w-fit items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-muted transition-colors hover:text-gold"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+      </svg>
+      @anandhanatyasthala
+    </a>
+  </div>
+
+  <!-- Right — image fills grid cell naturally -->
+  <div class="relative min-h-[60vw] lg:min-h-0">
+    <!-- Gradient: fades image into background on the left (desktop) -->
+    <div class="absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-ink to-transparent"></div>
+    <!-- Gradient: fades top on mobile so nav is readable -->
+    <div class="absolute inset-x-0 top-0 z-10 h-20 bg-gradient-to-b from-ink to-transparent lg:hidden"></div>
+
+    <Image
+      src={heroDancer}
+      alt="Sumithra Sudhakar in Bharatanatyam performance"
+      class="absolute inset-0 h-full w-full object-cover object-top"
+      widths={[640, 1260]}
+      sizes="(min-width: 1024px) 50vw, 100vw"
+      format="webp"
+      quality="mid"
+      fetchpriority="high"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+
 </section>

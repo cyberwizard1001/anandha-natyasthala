@@ -1,20 +1,64 @@
-<section class="content-pad section-gap pt-0">
-  <div class="max-w-4xl">
-    <h2 class="section-title">DANCE SCHOOL/STYLE</h2>
-    <p class="section-copy">
-      Embodying the rich, powerful spirit of rock n' roll, the ribbon portable active stereo speaker takes the unmistakable look and sound of Marshall. Ulumps the punches, and takes the show on the road.
-    </p>
-    <p class="section-copy">
-      Weighing in under 7 pounds, the Kilburn is a lightweight piece of vintage styled engineering. Sporting the black and gold logo, this iconic speaker has controls that are simple to use and dependable.
-    </p>
-  </div>
+---
+import { Image } from "astro:assets";
+import style1 from "../assets/images/style-1.jpg";
+import style2 from "../assets/images/style-2.jpg";
+---
 
-  <div class="mt-8 grid gap-5 lg:grid-cols-2">
-    <div class="overflow-hidden rounded-[1.4rem] bg-[#f7e6d4] p-3">
-      <img src="/images/style-1.jpg" alt="Dance style image 1" class="h-52 w-full rounded-[1.1rem] object-cover sm:h-64 lg:h-72" />
+<section class="section-y">
+  <div class="page-wrap pad">
+
+    <!-- Section header -->
+    <div class="grid gap-8 lg:grid-cols-2 lg:items-end lg:gap-16">
+      <div>
+        <p class="eyebrow mb-5">Lineage</p>
+        <h2 class="display text-[2.4rem] text-cream sm:text-[3.2rem] lg:text-[4rem]">
+          The Vazhuvoor<br />tradition
+        </h2>
+      </div>
+      <div>
+        <p class="text-sm leading-7 text-muted">
+          Anandha Natyasthala teaches in the <span class="text-cream font-medium">Vazhuvoor bani</span> — rooted in the tradition of Kalaimamai S.K. Rajarathnam Pillai — known for its rhythmic clarity, expressive depth, and architectural elegance. Students train under Sumithra Sudhakar, who has trained for over eighteen years under <span class="text-cream font-medium">Kalai Choodamani Smt. Sasmitta K. Aroraa</span> of Shankkaram School of Art.
+        </p>
+        <p class="mt-4 text-sm leading-7 text-muted">
+          The teaching emphasises adavu foundations, abhinaya, and performance readiness — building confident, grounded dancers at every stage.
+        </p>
+      </div>
     </div>
-    <div class="overflow-hidden rounded-[1.4rem] bg-[#f7e6d4] p-3">
-      <img src="/images/style-2.jpg" alt="Dance style image 2" class="h-52 w-full rounded-[1.1rem] object-cover sm:h-64 lg:h-72" />
+
+    <!-- Performance photo grid -->
+    <div class="mt-14 grid gap-3 sm:grid-cols-2">
+      <div class="group relative overflow-hidden">
+        <Image
+          src={style1}
+          alt="Sumithra Sudhakar — Bharatanatyam performance at Vaishakha Natanam 2026, Bekal"
+          class="h-[45vw] w-full object-cover object-center transition-transform duration-700 hover:scale-[1.02] sm:h-[30vw] lg:h-[26vw]"
+          widths={[640, 1024, 1440]}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          format="webp"
+          quality="mid"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-ink/90 to-transparent p-4 pt-10 text-xs leading-5 text-cream transition-transform duration-300 group-hover:translate-y-0">
+          Vaishakha Natanam 2026 · Bekal Gokulam Goushala, Kerala
+        </figcaption>
+      </div>
+      <div class="group relative overflow-hidden">
+        <Image
+          src={style2}
+          alt="Sumithra Sudhakar in a seated pose — Vaishakha Natanam 2026, Bekal"
+          class="h-[45vw] w-full object-cover object-center transition-transform duration-700 hover:scale-[1.02] sm:h-[30vw] lg:h-[26vw]"
+          widths={[640, 1024, 1440]}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          format="webp"
+          quality="mid"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-ink/90 to-transparent p-4 pt-10 text-xs leading-5 text-cream transition-transform duration-300 group-hover:translate-y-0">
+          Vaishakha Natanam 2026 · Bekal Gokulam Goushala, Kerala
+        </figcaption>
+      </div>
     </div>
   </div>
 </section>

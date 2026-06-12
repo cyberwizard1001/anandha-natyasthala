@@ -1,0 +1,159 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { Image } from "astro:assets";
+
+const galleryImages = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/images/gallery/*.jpg",
+  { eager: true }
+);
+
+// ── Portrait images ──────────────────────────────────────────────────────────
+const verticalImages = [
+  // Karunai Kadale Kaamakshi — 23 April 2025
+  { file: "karunai-2.jpg", alt: "Sumithra Sudhakar — Karunai Kadale Kaamakshi, Medai 2025", caption: "Karunai Kadale Kaamakshi · Medai, Coimbatore · April 2025" },
+  { file: "karunai-3.jpg", alt: "Sumithra Sudhakar in dramatic pose — Karunai Kadale Kaamakshi", caption: "Karunai Kadale Kaamakshi · Medai, Coimbatore · April 2025" },
+  { file: "karunai-4.jpg", alt: "Sumithra Sudhakar — Karunai Kadale Kaamakshi", caption: "Karunai Kadale Kaamakshi · Medai, Coimbatore · April 2025" },
+  // Irumudi Iraiva — 4 January 2026
+  { file: "irumudi-3.jpg", alt: "Irumudi Iraiva — seated and standing dancers on stage", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026" },
+  { file: "irumudi-5.jpg", alt: "Irumudi Iraiva — portrait stage shot", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026" },
+  // Bekal — Vaishakha Natanam 2026
+  { file: "bekal-3.jpg", alt: "Sumithra Sudhakar on stage at Vaishakha Natanam 2026", caption: "Vaishakha Natanam 2026 · Bekal, Kerala" },
+  { file: "bekal-5.jpg", alt: "Sumithra Sudhakar — Vaishakha Natanam 2026, Bekal", caption: "Vaishakha Natanam 2026 · Bekal, Kerala" },
+  // Kannada Rajyotsava
+  { file: "kr2023-solo.jpg", alt: "Sumithra Sudhakar — Kannada Rajyotsava 2023 solo performance", caption: "SAP Karnataka Rajyothsava 2023" },
+  { file: "kr2025-abhinaya-1.jpg", alt: "Sumithra Sudhakar — abhinaya, Kannada Rajyotsava 2025", caption: "SAP Karnataka Rajyothsava 2025 · Thematic presentation" },
+  { file: "kr2025-invocatory.jpg", alt: "Sumithra Sudhakar — invocatory dance, Kannada Rajyotsava 2025", caption: "SAP Karnataka Rajyothsava 2025 · Invocatory performance" },
+  { file: "kr2025-solo.jpg", alt: "Sumithra Sudhakar — solo on stage, Kannada Rajyotsava 2025", caption: "SAP Karnataka Rajyothsava 2025" },
+  // SAP Innovation Park
+  { file: "sap-innovationpark.jpg", alt: "Duo performance at SAP Labs India Innovation Park inauguration", caption: "SAP Labs India Innovation Park Inauguration · August 2025" },
+  // Salangai Poojai — Anandha Natyasthala student milestone
+  { file: "salangai-1.jpg", alt: "Student's Salangai Poojai — Anandha Natyasthala", caption: "Anandha Natyasthala · Janani's Salangai Poojai · May 2026" },
+  { file: "salangai-3.jpg", alt: "Student performing at Salangai Poojai", caption: "Anandha Natyasthala · Janani's Salangai Poojai · May 2026" },
+];
+
+// ── Landscape images ─────────────────────────────────────────────────────────
+const horizontalImages = [
+  // Karunai Kadale Kaamakshi
+  { file: "karunai-1.jpg", alt: "Sumithra Sudhakar — Karunai Kadale Kaamakshi, solo on dark stage", caption: "Karunai Kadale Kaamakshi · Medai, Coimbatore · April 2025" },
+  // Irumudi Iraiva
+  { file: "irumudi-1.jpg", alt: "Irumudi Iraiva — five dancers in formation on stage", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026" },
+  { file: "irumudi-2.jpg", alt: "Irumudi Iraiva — ensemble in synchronized pose", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026" },
+  { file: "irumudi-4.jpg", alt: "Irumudi Iraiva — dancers in dramatic scene", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026" },
+  // Bekal — Vaishakha Natanam 2026
+  { file: "bekal-1.jpg", alt: "Sumithra Sudhakar — Vaishakha Natanam 2026, Bekal", caption: "Vaishakha Natanam 2026 · Bekal Gokulam Goushala, Kerala" },
+  { file: "bekal-2.jpg", alt: "Performance at Vaishakha Natanam 2026, Bekal", caption: "Vaishakha Natanam 2026 · World-record festival: 372 hours, 2,663 artists" },
+  { file: "bekal-4.jpg", alt: "Sumithra Sudhakar at Vaishakha Natanam 2026", caption: "Vaishakha Natanam 2026 · Bekal, Kerala" },
+  // Kannada Rajyotsava
+  { file: "kr2023-group.jpg", alt: "Kannada Rajyotsava 2023 — three dancers on stage", caption: "SAP Karnataka Rajyothsava 2023" },
+  { file: "kr2024-group.jpg", alt: "Kannada Rajyotsava 2024 — large ensemble performance", caption: "SAP Karnataka Rajyothsava 2024" },
+  { file: "kr2025-abhinaya-2.jpg", alt: "Kannada Rajyotsava 2025 — abhinaya duo scene", caption: "SAP Karnataka Rajyothsava 2025 · Thematic presentation" },
+  { file: "rajyotsava-1.jpg", alt: "SAP Karnataka Rajyothsava — duo on dramatic LED stage", caption: "SAP Karnataka Rajyothsava" },
+  { file: "rajyotsava-2.jpg", alt: "SAP Karnataka Rajyothsava — full ensemble", caption: "SAP Karnataka Rajyothsava" },
+  // SAP Bandhan & Innovation Park
+  { file: "sap-bandhan-1.jpg", alt: "SAP Bandhan 2025 — duo performance on purple LED stage", caption: "SAP Bandhan 2025" },
+  { file: "sap-bandhan-2.jpg", alt: "SAP Bandhan 2025 — full ensemble on main SAP stage", caption: "SAP Bandhan 2025" },
+  { file: "sap-performance.jpg", alt: "SAP Karnataka Rajyothsava — group stage performance", caption: "SAP Karnataka Rajyothsava" },
+  { file: "sap-solo.jpg", alt: "Sumithra Sudhakar performing at SAP Labs India campus", caption: "SAP Labs India · Invocatory performance" },
+  // RMKV Silks
+  { file: "rmkv-1.jpg", alt: "RMKV Silks 'Weaves & Wonders' — Bharatanatyam ensemble", caption: "RMKV Silks 'Weaves & Wonders' Collection Launch · Maheshwari Bhavan, Coimbatore · September 2025" },
+  { file: "rmkv-2.jpg", alt: "RMKV Silks launch — dancers in formation", caption: "RMKV Silks · September 2025" },
+  { file: "rmkv-3.jpg", alt: "RMKV Silks — Bharatanatyam group choreography", caption: "RMKV Silks · September 2025" },
+  { file: "rmkv-4.jpg", alt: "RMKV Silks — ensemble performance", caption: "RMKV Silks · September 2025" },
+  // Salangai Poojai
+  { file: "salangai-2.jpg", alt: "Student performing at Salangai Poojai — Anandha Natyasthala", caption: "Anandha Natyasthala · Janani's Salangai Poojai · May 2026" },
+];
+---
+
+<BaseLayout
+  title="Gallery — Anandha Natyasthala"
+  description="Performance photography from Sumithra Sudhakar and Anandha Natyasthala — Vaishakha Natanam, Irumudi Iraiva, SAP Karnataka Rajyothsava, RMKV Silks, and more."
+>
+  <Header />
+
+  <main class="pt-24">
+
+    <!-- Page header -->
+    <section class="section-y pb-12">
+      <div class="page-wrap pad">
+        <p class="eyebrow mb-4">Photography</p>
+        <h1 class="display text-[3rem] text-cream sm:text-[4rem] lg:text-[5rem]">Gallery</h1>
+        <p class="mt-4 max-w-xl text-sm leading-7 text-muted">
+          Selected images from performances — ticketed productions, national festivals, corporate events, and school milestones.
+        </p>
+      </div>
+    </section>
+
+    <!-- Landscape grid -->
+    <section class="pb-3">
+      <div class="page-wrap pad">
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {horizontalImages.map(({ file, alt, caption }) => (
+            <figure class="group relative aspect-[3/2] overflow-hidden">
+              <Image
+                src={galleryImages[`../assets/images/gallery/${file}`].default}
+                alt={alt}
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                widths={[400, 800, 1200]}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                format="webp"
+                quality="mid"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption class="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-ink/90 to-transparent p-4 pt-10 text-xs leading-5 text-cream transition-transform duration-300 group-hover:translate-y-0">
+                {caption}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Portrait grid -->
+    <section class="pb-24">
+      <div class="page-wrap pad">
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          {verticalImages.map(({ file, alt, caption }) => (
+            <figure class="group relative aspect-[2/3] overflow-hidden">
+              <Image
+                src={galleryImages[`../assets/images/gallery/${file}`].default}
+                alt={alt}
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                widths={[300, 600, 900]}
+                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                format="webp"
+                quality="mid"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption class="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-ink/90 to-transparent p-4 pt-10 text-xs leading-5 text-cream transition-transform duration-300 group-hover:translate-y-0">
+                {caption}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-y bg-ink-2">
+      <div class="page-wrap pad text-center">
+        <h2 class="display text-[2rem] text-cream sm:text-[2.5rem]">Follow along</h2>
+        <p class="mt-4 text-sm text-muted">More photos and videos on Instagram.</p>
+        <div class="mt-8 flex justify-center gap-4 flex-wrap">
+          <a href="https://www.instagram.com/anandhanatyasthala" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            @anandhanatyasthala
+          </a>
+          <a href="https://www.instagram.com/sumiithraa_sudhakar" target="_blank" rel="noopener noreferrer" class="btn-outline">
+            @sumiithraa_sudhakar
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
