@@ -2,7 +2,7 @@
 const faqs = [
   {
     q: "Are classes suitable for all age groups?",
-    a: "Yes — children, teenagers, adults, and senior students are all welcome. Classes are structured to match the pace and focus appropriate to each age group.",
+    a: "Yes, children, teenagers, adults, and senior students are all welcome. Classes are structured to match the pace and focus appropriate to each age group.",
   },
   {
     q: "Do I need prior dance experience?",
@@ -21,7 +21,19 @@ const faqs = [
     a: "We try to accommodate rescheduling when possible. Please give advance notice and we will find a suitable slot.",
   },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: { "@type": "Answer", text: a },
+  })),
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <section id="faq" class="section-y">
   <div class="page-wrap pad">

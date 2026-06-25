@@ -9,7 +9,7 @@ type Props = {
 
 const {
   title = "Anandha Natyasthala",
-  description = "Classical Bharatanatyam dance school in the Vazhuvoor bani, founded by Sumithra Sudhakar. Online classes for children and adults of all levels.",
+  description = "Online Bharatanatyam classes via Zoom with experienced teacher Sumithra Sudhakar, Vazhuvoor bani. For students in India and abroad, children and adults, all levels.",
   image = "/images/hero-dancer.jpg",
 } = Astro.props as Props;
 
@@ -18,11 +18,13 @@ const ogImage = new URL(image, Astro.site);
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "PerformingArtsTheater",
+  "@type": ["DanceSchool", "PerformingArtsTheater"],
   name: "Anandha Natyasthala",
-  description: "Classical Bharatanatyam dance school in the Vazhuvoor bani, founded by Sumithra Sudhakar.",
+  description: "Online Bharatanatyam classes via Zoom, taught by Indian classical dance teacher Sumithra Sudhakar in the Vazhuvoor bani, for students in India and abroad.",
   url: "https://anandhanatyasthala.com",
   email: "hello@anandhanatyasthala.com",
+  areaServed: "Worldwide",
+  availableLanguage: ["English", "Tamil"],
   founder: {
     "@type": "Person",
     name: "Sumithra Sudhakar",
@@ -31,6 +33,11 @@ const schema = {
   },
   sameAs: ["https://www.instagram.com/anandhanatyasthala"],
   knowsAbout: ["Bharatanatyam", "Vazhuvoor bani", "Classical Indian Dance"],
+  makesOffer: {
+    "@type": "Offer",
+    name: "Online Bharatanatyam Classes via Zoom",
+    areaServed: "Worldwide",
+  },
 };
 ---
 
@@ -53,7 +60,7 @@ const schema = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Sumithra Sudhakar" />
-    <meta name="keywords" content="Bharatanatyam, dance school, Vazhuvoor bani, classical dance, online dance classes, Sumithra Sudhakar, Anandha Natyasthala" />
+    <meta name="keywords" content="Bharatanatyam, online Bharatanatyam classes, Bharatanatyam classes via Zoom, Indian classical dance teacher online, learn Bharatanatyam online from India, Bharatanatyam for NRI kids, Indian dance classes abroad, dance school, Vazhuvoor bani, classical dance, Sumithra Sudhakar, Anandha Natyasthala" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -63,6 +70,8 @@ const schema = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:site_name" content="Anandha Natyasthala" />
     <meta property="og:locale" content="en_IN" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="en_GB" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
