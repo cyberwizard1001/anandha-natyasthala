@@ -9,60 +9,93 @@ const galleryImages = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 
-// ── Portrait images ──────────────────────────────────────────────────────────
-const verticalImages = [
-  // Karunai Kadale Kaamakshi — 23 April 2025
-  { file: "karunai-2.jpg", alt: "Sumithra Sudhakar — Karunai Kadale Kaamakshi, Medai 2025", caption: "Karunai Kadale Kaamakshi · Medai, Coimbatore · April 2025" },
-  { file: "karunai-3.jpg", alt: "Sumithra Sudhakar in dramatic pose — Karunai Kadale Kaamakshi", caption: "Karunai Kadale Kaamakshi · Medai, Coimbatore · April 2025" },
-  { file: "karunai-4.jpg", alt: "Sumithra Sudhakar — Karunai Kadale Kaamakshi", caption: "Karunai Kadale Kaamakshi · Medai, Coimbatore · April 2025" },
-  // Irumudi Iraiva — 4 January 2026
-  { file: "irumudi-3.jpg", alt: "Irumudi Iraiva — seated and standing dancers on stage", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026" },
-  { file: "irumudi-5.jpg", alt: "Irumudi Iraiva — portrait stage shot", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026" },
-  // Bekal — Vaishakha Natanam 2026
-  { file: "bekal-3.jpg", alt: "Sumithra Sudhakar on stage at Vaishakha Natanam 2026", caption: "Vaishakha Natanam 2026 · Bekal, Kerala" },
-  { file: "bekal-5.jpg", alt: "Sumithra Sudhakar — Vaishakha Natanam 2026, Bekal", caption: "Vaishakha Natanam 2026 · Bekal, Kerala" },
-  // Kannada Rajyotsava
-  { file: "kr2023-solo.jpg", alt: "Sumithra Sudhakar — Kannada Rajyotsava 2023 solo performance", caption: "SAP Karnataka Rajyothsava 2023" },
-  { file: "kr2025-abhinaya-1.jpg", alt: "Sumithra Sudhakar — abhinaya, Kannada Rajyotsava 2025", caption: "SAP Karnataka Rajyothsava 2025 · Thematic presentation" },
-  { file: "kr2025-invocatory.jpg", alt: "Sumithra Sudhakar — invocatory dance, Kannada Rajyotsava 2025", caption: "SAP Karnataka Rajyothsava 2025 · Invocatory performance" },
-  { file: "kr2025-solo.jpg", alt: "Sumithra Sudhakar — solo on stage, Kannada Rajyotsava 2025", caption: "SAP Karnataka Rajyothsava 2025" },
-  // SAP Innovation Park
-  { file: "sap-innovationpark.jpg", alt: "Duo performance at SAP Labs India Innovation Park inauguration", caption: "SAP Labs India Innovation Park Inauguration · August 2025" },
-  // Salangai Poojai — Anandha Natyasthala student milestone
-  { file: "salangai-1.jpg", alt: "Student's Salangai Poojai — Anandha Natyasthala", caption: "Anandha Natyasthala · Janani's Salangai Poojai · May 2026" },
-  { file: "salangai-3.jpg", alt: "Student performing at Salangai Poojai", caption: "Anandha Natyasthala · Janani's Salangai Poojai · May 2026" },
-];
+type GalleryImage = {
+  file: string;
+  alt: string;
+  caption: string;
+  orientation: "portrait" | "landscape";
+};
 
-// ── Landscape images ─────────────────────────────────────────────────────────
-const horizontalImages = [
-  // Karunai Kadale Kaamakshi
-  { file: "karunai-1.jpg", alt: "Sumithra Sudhakar — Karunai Kadale Kaamakshi, solo on dark stage", caption: "Karunai Kadale Kaamakshi · Medai, Coimbatore · April 2025" },
-  // Irumudi Iraiva
-  { file: "irumudi-1.jpg", alt: "Irumudi Iraiva — five dancers in formation on stage", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026" },
-  { file: "irumudi-2.jpg", alt: "Irumudi Iraiva — ensemble in synchronized pose", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026" },
-  { file: "irumudi-4.jpg", alt: "Irumudi Iraiva — dancers in dramatic scene", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026" },
-  // Bekal — Vaishakha Natanam 2026
-  { file: "bekal-1.jpg", alt: "Sumithra Sudhakar — Vaishakha Natanam 2026, Bekal", caption: "Vaishakha Natanam 2026 · Bekal Gokulam Goushala, Kerala" },
-  { file: "bekal-2.jpg", alt: "Performance at Vaishakha Natanam 2026, Bekal", caption: "Vaishakha Natanam 2026 · World-record festival: 372 hours, 2,663 artists" },
-  { file: "bekal-4.jpg", alt: "Sumithra Sudhakar at Vaishakha Natanam 2026", caption: "Vaishakha Natanam 2026 · Bekal, Kerala" },
-  // Kannada Rajyotsava
-  { file: "kr2023-group.jpg", alt: "Kannada Rajyotsava 2023 — three dancers on stage", caption: "SAP Karnataka Rajyothsava 2023" },
-  { file: "kr2024-group.jpg", alt: "Kannada Rajyotsava 2024 — large ensemble performance", caption: "SAP Karnataka Rajyothsava 2024" },
-  { file: "kr2025-abhinaya-2.jpg", alt: "Kannada Rajyotsava 2025 — abhinaya duo scene", caption: "SAP Karnataka Rajyothsava 2025 · Thematic presentation" },
-  { file: "rajyotsava-1.jpg", alt: "SAP Karnataka Rajyothsava — duo on dramatic LED stage", caption: "SAP Karnataka Rajyothsava" },
-  { file: "rajyotsava-2.jpg", alt: "SAP Karnataka Rajyothsava — full ensemble", caption: "SAP Karnataka Rajyothsava" },
-  // SAP Bandhan & Innovation Park
-  { file: "sap-bandhan-1.jpg", alt: "SAP Bandhan 2025 — duo performance on purple LED stage", caption: "SAP Bandhan 2025" },
-  { file: "sap-bandhan-2.jpg", alt: "SAP Bandhan 2025 — full ensemble on main SAP stage", caption: "SAP Bandhan 2025" },
-  { file: "sap-performance.jpg", alt: "SAP Karnataka Rajyothsava — group stage performance", caption: "SAP Karnataka Rajyothsava" },
-  { file: "sap-solo.jpg", alt: "Sumithra Sudhakar performing at SAP Labs India campus", caption: "SAP Labs India · Invocatory performance" },
-  // RMKV Silks
-  { file: "rmkv-1.jpg", alt: "RMKV Silks 'Weaves & Wonders' — Bharatanatyam ensemble", caption: "RMKV Silks 'Weaves & Wonders' Collection Launch · Maheshwari Bhavan, Coimbatore · September 2025" },
-  { file: "rmkv-2.jpg", alt: "RMKV Silks launch — dancers in formation", caption: "RMKV Silks · September 2025" },
-  { file: "rmkv-3.jpg", alt: "RMKV Silks — Bharatanatyam group choreography", caption: "RMKV Silks · September 2025" },
-  { file: "rmkv-4.jpg", alt: "RMKV Silks — ensemble performance", caption: "RMKV Silks · September 2025" },
-  // Salangai Poojai
-  { file: "salangai-2.jpg", alt: "Student performing at Salangai Poojai — Anandha Natyasthala", caption: "Anandha Natyasthala · Janani's Salangai Poojai · May 2026" },
+const sections = [
+  {
+    id: "teacher",
+    label: "Sumithra Sudhakar",
+    years: [
+      {
+        year: 2026,
+        images: [
+          // Bekal — Vaishakha Natanam 2026
+          { file: "bekal-1.jpg", alt: "Sumithra Sudhakar — Vaishakha Natanam 2026, Bekal", caption: "Vaishakha Natanam 2026 · Bekal Gokulam Goushala, Kerala", orientation: "landscape" },
+          { file: "bekal-2.jpg", alt: "Performance at Vaishakha Natanam 2026, Bekal", caption: "Vaishakha Natanam 2026 · World-record festival: 372 hours, 2,663 artists", orientation: "landscape" },
+          { file: "bekal-3.jpg", alt: "Sumithra Sudhakar on stage at Vaishakha Natanam 2026", caption: "Vaishakha Natanam 2026 · Bekal, Kerala", orientation: "portrait" },
+          { file: "bekal-4.jpg", alt: "Sumithra Sudhakar at Vaishakha Natanam 2026", caption: "Vaishakha Natanam 2026 · Bekal, Kerala", orientation: "landscape" },
+          { file: "bekal-5.jpg", alt: "Sumithra Sudhakar — Vaishakha Natanam 2026, Bekal", caption: "Vaishakha Natanam 2026 · Bekal, Kerala", orientation: "portrait" },
+          // Irumudi Iraiva — 4 January 2026
+          { file: "irumudi-1.jpg", alt: "Irumudi Iraiva — five dancers in formation on stage", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026", orientation: "landscape" },
+          { file: "irumudi-2.jpg", alt: "Irumudi Iraiva — ensemble in synchronized pose", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026", orientation: "landscape" },
+          { file: "irumudi-3.jpg", alt: "Irumudi Iraiva — seated and standing dancers on stage", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026", orientation: "portrait" },
+          { file: "irumudi-4.jpg", alt: "Irumudi Iraiva — dancers in dramatic scene", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026", orientation: "landscape" },
+          { file: "irumudi-5.jpg", alt: "Irumudi Iraiva — portrait stage shot", caption: "Irumudi Iraiva · Medai, Coimbatore · January 2026", orientation: "portrait" },
+        ] as GalleryImage[],
+      },
+      {
+        year: 2025,
+        images: [
+          // Karunai Kadale Kaamakshi — 23 April 2025
+          { file: "karunai-1.jpg", alt: "Sumithra Sudhakar — Karunai Kadale Kaamakshi, solo on dark stage", caption: "Karunai Kadale Kaamakshi · Medai, Coimbatore · April 2025", orientation: "landscape" },
+          { file: "karunai-2.jpg", alt: "Sumithra Sudhakar — Karunai Kadale Kaamakshi, Medai 2025", caption: "Karunai Kadale Kaamakshi · Medai, Coimbatore · April 2025", orientation: "portrait" },
+          { file: "karunai-3.jpg", alt: "Sumithra Sudhakar in dramatic pose — Karunai Kadale Kaamakshi", caption: "Karunai Kadale Kaamakshi · Medai, Coimbatore · April 2025", orientation: "portrait" },
+          { file: "karunai-4.jpg", alt: "Sumithra Sudhakar — Karunai Kadale Kaamakshi", caption: "Karunai Kadale Kaamakshi · Medai, Coimbatore · April 2025", orientation: "portrait" },
+          // SAP Karnataka Rajyothsava 2025
+          { file: "kr2025-abhinaya-1.jpg", alt: "Sumithra Sudhakar — abhinaya, Kannada Rajyotsava 2025", caption: "SAP Karnataka Rajyothsava 2025 · Thematic presentation", orientation: "portrait" },
+          { file: "kr2025-abhinaya-2.jpg", alt: "Kannada Rajyotsava 2025 — abhinaya duo scene", caption: "SAP Karnataka Rajyothsava 2025 · Thematic presentation", orientation: "landscape" },
+          { file: "kr2025-invocatory.jpg", alt: "Sumithra Sudhakar — invocatory dance, Kannada Rajyotsava 2025", caption: "SAP Karnataka Rajyothsava 2025 · Invocatory performance", orientation: "portrait" },
+          { file: "kr2025-solo.jpg", alt: "Sumithra Sudhakar — solo on stage, Kannada Rajyotsava 2025", caption: "SAP Karnataka Rajyothsava 2025", orientation: "portrait" },
+          // SAP Innovation Park — August 2025
+          { file: "sap-innovationpark.jpg", alt: "Duo performance at SAP Labs India Innovation Park inauguration", caption: "SAP Labs India Innovation Park Inauguration · August 2025", orientation: "portrait" },
+          // SAP Bandhan 2025
+          { file: "sap-bandhan-1.jpg", alt: "SAP Bandhan 2025 — duo performance on purple LED stage", caption: "SAP Bandhan 2025", orientation: "landscape" },
+          { file: "sap-bandhan-2.jpg", alt: "SAP Bandhan 2025 — full ensemble on main SAP stage", caption: "SAP Bandhan 2025", orientation: "landscape" },
+          // RMKV Silks — September 2025
+          { file: "rmkv-1.jpg", alt: "RMKV Silks 'Weaves & Wonders' — Bharatanatyam ensemble", caption: "RMKV Silks 'Weaves & Wonders' Collection Launch · Maheshwari Bhavan, Coimbatore · September 2025", orientation: "landscape" },
+          { file: "rmkv-2.jpg", alt: "RMKV Silks launch — dancers in formation", caption: "RMKV Silks · September 2025", orientation: "landscape" },
+          { file: "rmkv-3.jpg", alt: "RMKV Silks — Bharatanatyam group choreography", caption: "RMKV Silks · September 2025", orientation: "landscape" },
+          { file: "rmkv-4.jpg", alt: "RMKV Silks — ensemble performance", caption: "RMKV Silks · September 2025", orientation: "landscape" },
+        ] as GalleryImage[],
+      },
+      {
+        year: 2024,
+        images: [
+          { file: "kr2024-group.jpg", alt: "Kannada Rajyotsava 2024 — large ensemble performance", caption: "SAP Karnataka Rajyothsava 2024", orientation: "landscape" },
+        ] as GalleryImage[],
+      },
+      {
+        year: 2023,
+        images: [
+          { file: "kr2023-group.jpg", alt: "Kannada Rajyotsava 2023 — three dancers on stage", caption: "SAP Karnataka Rajyothsava 2023", orientation: "landscape" },
+          { file: "kr2023-solo.jpg", alt: "Sumithra Sudhakar — Kannada Rajyotsava 2023 solo performance", caption: "SAP Karnataka Rajyothsava 2023", orientation: "portrait" },
+          { file: "rajyotsava-1.jpg", alt: "SAP Karnataka Rajyothsava — duo on dramatic LED stage", caption: "SAP Karnataka Rajyothsava", orientation: "landscape" },
+          { file: "rajyotsava-2.jpg", alt: "SAP Karnataka Rajyothsava — full ensemble", caption: "SAP Karnataka Rajyothsava", orientation: "landscape" },
+          { file: "sap-performance.jpg", alt: "SAP Karnataka Rajyothsava — group stage performance", caption: "SAP Karnataka Rajyothsava", orientation: "landscape" },
+          { file: "sap-solo.jpg", alt: "Sumithra Sudhakar performing at SAP Labs India campus", caption: "SAP Labs India · Invocatory performance", orientation: "portrait" },
+        ] as GalleryImage[],
+      },
+    ],
+  },
+  {
+    id: "school",
+    label: "Anandha Natyasthala",
+    years: [
+      {
+        year: 2026,
+        images: [
+          { file: "salangai-1.jpg", alt: "Student's Salangai Poojai — Anandha Natyasthala", caption: "Anandha Natyasthala · Janani's Salangai Poojai · May 2026", orientation: "portrait" },
+          { file: "salangai-2.jpg", alt: "Student performing at Salangai Poojai — Anandha Natyasthala", caption: "Anandha Natyasthala · Janani's Salangai Poojai · May 2026", orientation: "landscape" },
+          { file: "salangai-3.jpg", alt: "Student performing at Salangai Poojai", caption: "Anandha Natyasthala · Janani's Salangai Poojai · May 2026", orientation: "portrait" },
+        ] as GalleryImage[],
+      },
+    ],
+  },
 ];
 ---
 
@@ -85,57 +118,75 @@ const horizontalImages = [
       </div>
     </section>
 
-    <!-- Landscape grid -->
-    <section class="pb-3">
-      <div class="page-wrap pad">
-        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {horizontalImages.map(({ file, alt, caption }) => (
-            <figure class="group relative aspect-[3/2] overflow-hidden">
-              <Image
-                src={galleryImages[`../assets/images/gallery/${file}`].default}
-                alt={alt}
-                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                widths={[400, 800, 1200]}
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                format="webp"
-                quality="mid"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption class="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-ink/90 to-transparent p-4 pt-10 text-xs leading-5 text-cream transition-transform duration-300 group-hover:translate-y-0">
-                {caption}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
+    <!-- Gallery sections -->
+    {sections.map((section) => (
+      <section class="pb-20">
+        <div class="page-wrap pad">
+          <!-- Section heading -->
+          <div class="mb-10 border-l-2 border-gold pl-5">
+            <p class="eyebrow mb-1">{section.id === "teacher" ? "Performances" : "Student Milestones"}</p>
+            <h2 class="display text-[2rem] text-cream sm:text-[2.5rem]">{section.label}</h2>
+          </div>
 
-    <!-- Portrait grid -->
-    <section class="pb-24">
-      <div class="page-wrap pad">
-        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {verticalImages.map(({ file, alt, caption }) => (
-            <figure class="group relative aspect-[2/3] overflow-hidden">
-              <Image
-                src={galleryImages[`../assets/images/gallery/${file}`].default}
-                alt={alt}
-                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                widths={[300, 600, 900]}
-                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-                format="webp"
-                quality="mid"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption class="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-ink/90 to-transparent p-4 pt-10 text-xs leading-5 text-cream transition-transform duration-300 group-hover:translate-y-0">
-                {caption}
-              </figcaption>
-            </figure>
-          ))}
+          <!-- Years -->
+          {section.years.map((yearGroup) => {
+            const landscape = yearGroup.images.filter(i => i.orientation === "landscape");
+            const portrait = yearGroup.images.filter(i => i.orientation === "portrait");
+            return (
+              <div class="mb-14">
+                <p class="eyebrow mb-6">{yearGroup.year}</p>
+
+                {landscape.length > 0 && (
+                  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 mb-3">
+                    {landscape.map(({ file, alt, caption }) => (
+                      <figure class="group relative aspect-[3/2] overflow-hidden">
+                        <Image
+                          src={galleryImages[`../assets/images/gallery/${file}`].default}
+                          alt={alt}
+                          class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                          widths={[400, 800, 1200]}
+                          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                          format="webp"
+                          quality="mid"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <figcaption class="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-ink/90 to-transparent p-4 pt-10 text-xs leading-5 text-cream transition-transform duration-300 group-hover:translate-y-0">
+                          {caption}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
+
+                {portrait.length > 0 && (
+                  <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+                    {portrait.map(({ file, alt, caption }) => (
+                      <figure class="group relative aspect-[2/3] overflow-hidden">
+                        <Image
+                          src={galleryImages[`../assets/images/gallery/${file}`].default}
+                          alt={alt}
+                          class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                          widths={[300, 600, 900]}
+                          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                          format="webp"
+                          quality="mid"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <figcaption class="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-ink/90 to-transparent p-4 pt-10 text-xs leading-5 text-cream transition-transform duration-300 group-hover:translate-y-0">
+                          {caption}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
-      </div>
-    </section>
+      </section>
+    ))}
 
     <!-- CTA -->
     <section class="section-y bg-ink-2">

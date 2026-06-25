@@ -1,6 +1,12 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../assets/images/logo.png";
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) => {
+  const h = href.replace(/\/$/, "") || "/";
+  return pathname === h;
+};
 ---
 
 <header id="site-header" class="fixed inset-x-0 top-0 z-50 transition-colors duration-300">
@@ -20,9 +26,31 @@ import logo from "../assets/images/logo.png";
 
     <!-- Desktop nav -->
     <nav class="hidden items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] sm:flex">
-      <a href="/" class="px-3 py-2 text-muted transition-colors hover:text-cream">Home</a>
-      <a href="/about" class="px-3 py-2 text-muted transition-colors hover:text-cream">About</a>
-      <a href="/gallery" class="px-3 py-2 text-muted transition-colors hover:text-cream">Gallery</a>
+      <a href="/" class={`px-3 py-2 transition-colors hover:text-cream ${isActive("/") ? "text-cream border-b-2 border-gold pb-1" : "text-muted"}`}>Home</a>
+      <a href="/about" class={`px-3 py-2 transition-colors hover:text-cream ${isActive("/about") ? "text-cream border-b-2 border-gold pb-1" : "text-muted"}`}>About</a>
+      <a href="/gallery" class={`px-3 py-2 transition-colors hover:text-cream ${isActive("/gallery") ? "text-cream border-b-2 border-gold pb-1" : "text-muted"}`}>Gallery</a>
+      <a
+        href="https://www.instagram.com/anandhanatyasthala"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-3 py-2 text-muted transition-colors hover:text-peacock-2"
+        aria-label="Instagram"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+        </svg>
+      </a>
+      <a
+        href="https://www.youtube.com/@Anandha_Natyasthala"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-3 py-2 text-muted transition-colors hover:text-gold"
+        aria-label="YouTube"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
       <a href="/#register" class="btn-primary ml-2 text-[0.7rem] px-5 py-2.5">Register</a>
     </nav>
 
@@ -45,12 +73,25 @@ import logo from "../assets/images/logo.png";
     class="hidden border-t border-border bg-ink px-5 py-6 sm:hidden"
   >
     <nav class="flex flex-col gap-1">
-      {[["/","Home"],["/about","About"],["/gallery","Gallery"],["/#contact","Contact"]].map(([href,label]) => (
+      {([["/","Home"],["/about","About"],["/gallery","Gallery"]] as [string,string][]).map(([href,label]) => (
         <a
           href={href}
-          class="block py-3 text-sm font-medium text-muted transition-colors hover:text-cream border-b border-border last:border-0"
+          class={`block py-3 text-sm font-medium transition-colors hover:text-cream border-b border-border ${isActive(href) ? "text-cream border-l-2 border-l-gold pl-3" : "text-muted"}`}
         >{label}</a>
       ))}
+      <a href="/#contact" class="block py-3 text-sm font-medium text-muted transition-colors hover:text-cream border-b border-border">Contact</a>
+      <a
+        href="https://www.instagram.com/anandhanatyasthala"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block py-3 text-sm font-medium text-muted transition-colors hover:text-peacock-2 border-b border-border"
+      >Instagram</a>
+      <a
+        href="https://www.youtube.com/@Anandha_Natyasthala"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block py-3 text-sm font-medium text-muted transition-colors hover:text-gold border-b border-border last:border-0"
+      >YouTube</a>
       <a href="/#register" class="btn-primary mt-4 text-center">Register interest</a>
     </nav>
   </div>
