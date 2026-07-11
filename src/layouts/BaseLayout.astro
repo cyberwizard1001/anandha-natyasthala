@@ -86,9 +86,22 @@ const schema = {
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+    <!-- Cookiebot -->
+    <script id="Cookiebot" is:inline src="https://consent.cookiebot.com/uc.js" data-cbid="b6c4a2b4-dcd6-4964-a707-811dc488b09b" type="text/javascript" async></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-1D8WSFXR62" type="text/plain" data-cookieconsent="statistics"></script>
+    <script is:inline type="text/plain" data-cookieconsent="statistics">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-1D8WSFXR62');
+    </script>
   </head>
   <body>
     <slot />
-    <script is:inline src="https://tally.so/widgets/embed.js"></script>
+    <script is:inline src="https://tally.so/widgets/embed.js" type="text/plain" data-cookieconsent="preferences"></script>
   </body>
 </html>
