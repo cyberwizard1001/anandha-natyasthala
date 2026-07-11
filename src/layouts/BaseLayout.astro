@@ -87,21 +87,41 @@ const schema = {
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
-    <!-- Cookiebot -->
-    <script id="Cookiebot" is:inline src="https://consent.cookiebot.com/uc.js" data-cbid="b6c4a2b4-dcd6-4964-a707-811dc488b09b" type="text/javascript" async></script>
-
-    <!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-1D8WSFXR62" type="text/plain" data-cookieconsent="statistics"></script>
-    <script is:inline type="text/plain" data-cookieconsent="statistics">
+    <!-- Google Consent Mode default (must run before gtag.js and Cookiebot) -->
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500,
+      });
+    </script>
 
+    <!-- Cookiebot -->
+    <script id="Cookiebot" is:inline src="https://consent.cookiebot.com/uc.js" data-cbid="b6c4a2b4-dcd6-4964-a707-811dc488b09b" data-blockingmode="auto" type="text/javascript" async></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-1D8WSFXR62"></script>
+    <script is:inline>
+      gtag('js', new Date());
       gtag('config', 'G-1D8WSFXR62');
     </script>
   </head>
   <body>
     <slot />
     <script is:inline src="https://tally.so/widgets/embed.js" type="text/plain" data-cookieconsent="preferences"></script>
+    <script is:inline>
+      window.addEventListener('CookiebotOnConsentReady', function () {
+        gtag('consent', 'update', {
+          ad_storage: Cookiebot.consent.marketing ? 'granted' : 'denied',
+          ad_user_data: Cookiebot.consent.marketing ? 'granted' : 'denied',
+          ad_personalization: Cookiebot.consent.marketing ? 'granted' : 'denied',
+          analytics_storage: Cookiebot.consent.statistics ? 'granted' : 'denied',
+        });
+      });
+    </script>
   </body>
 </html>
